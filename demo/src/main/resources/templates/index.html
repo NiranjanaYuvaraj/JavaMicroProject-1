@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        .contact-details {
+            flex-grow: 1;
+        }
+        .contact-details span {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .actions button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .actions button.edit {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .actions button.delete {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .add-contact {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .add-contact a {
+            text-decoration: none;
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .add-contact a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Address Book</h1>
+    <div class="contact-container">
+        <ul>
+            <li th:each="contact : ${contacts}">
+                <div class="contact-details">
+                    <span th:text="${contact.name}"></span>
+                    <span th:text="${contact.email}"></span>
+                    <span th:text="${contact.phone}"></span>
+                </div>
+                <div class="actions">
+                    <button type="button" class="edit" th:onclick="'/edit/' + ${contact.id}">Edit</button>
+                    <button type="button" class="delete" th:onclick="'/delete/' + ${contact.id}">Delete</button>
+                </div>
+            </li>
+        </ul>
+        <div class="add-contact">
+            <a th:href="@{/add}">Add New Contact</a>
+        </div>
+    </div>
+</body>
+</html>
